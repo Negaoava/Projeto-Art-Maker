@@ -187,6 +187,7 @@ fractalTreeCanvas.addEventListener('mouseout', () => {
 });
 
 fractalTreeCanvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
     const rect = fractalTreeCanvas.getBoundingClientRect();
 
     let touch = e.touches[0];
