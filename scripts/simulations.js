@@ -8,7 +8,6 @@ const height = sandCanvas.height;
 const width = sandCanvas.width;
 const cols = width / cellSize;
 const rows = height / cellSize;
-const rect = sandCanvas.getBoundingClientRect();
 
 let sandGrid = make2DArray(rows, cols);
 let nextSandGrid = make2DArray(rows, cols);
@@ -20,6 +19,8 @@ let isMouseDown = false;
 
 // Mouse interactivity
 sandCanvas.addEventListener('mousemove', (e) => {
+    const rect = sandCanvas.getBoundingClientRect();
+
     let mouseX = Math.round((e.x - rect.left) / cellSize);
     let mouseY = Math.round((e.y - rect.top) / cellSize);
 
@@ -43,8 +44,11 @@ let isTouching = false;
 // Mobile interactivity
 sandCanvas.addEventListener('touchmove', (e) => {
     e.preventDefault();
-    let touchX = Math.round((e.x - rect.left) / cellSize);
-    let touchY = Math.round((e.y - rect.top) / cellSize);
+    const rect = sandCanvas.getBoundingClientRect();
+    const touch = e.touches[0];
+
+    let touchX = Math.round((touch.clientX - rect.left) / cellSize);
+    let touchY = Math.round((touch.clientY - rect.top) / cellSize);
 
     let active = 1;
 
