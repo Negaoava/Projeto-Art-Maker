@@ -1,4 +1,4 @@
-import { copy2DArray, make2DArray, reset2DArray } from "./utils.js";
+import { copy2DArray, make2DArray, reset2DArray, map } from "./utils.js";
 
 // First simulation logic
 const cellSize = 5;
@@ -76,7 +76,7 @@ function sandDrawLoop() {
 }
 sandDrawLoop();
 
-// Function responsible for recognizing active cells and display them
+// Function responsible for recognizing active cells and then drawing them
 function drawSand() {
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
@@ -134,3 +134,71 @@ function sandBehaviour() {
     reset2DArray(nextSandGrid);
 }
 
+// Second simulation logic
+
+const fractalTreeCanvas = document.getElementById('simulation-two');
+const fractalTreeCtx = fractalTreeCanvas.getContext('2d');
+
+let separationAngle = Math.PI / 6;
+let angle = Math.PI / 2
+let branchLength = 125;
+fractalTreeCtx.strokeStyle = 'white';
+
+function drawFractalTree() {
+    fractalTreeCtx.setTransform(1, 0, 0, 1, 0, 0);
+    fractalTreeCtx.clearRect(0, 0, width, height);
+    fractalTreeCtx.translate(width / 2, height);
+    fractalTreeCtx.scale(1, -1);
+
+    drawBranch(branchLength, 0, 0, angle);
+    
+    requestAnimationFrame(drawFractalTree);
+}
+drawFractalTree();
+
+function drawBranch(length, x, y, angle) {
+    let endX = x + length * Math.cos(angle);
+    let endY = y + length * Math.sin(angle);
+    
+    fractalTreeCtx.beginPath();
+    fractalTreeCtx.moveTo(x, y);
+    fractalTreeCtx.lineTo(endX, endY);
+    fractalTreeCtx.stroke();
+
+    if (length > 3) {
+        drawBranch(length * 2/3, endX, endY, angle + separationAngle);
+        drawBranch(length * 2/3, endX, endY, angle - separationAngle);
+    }
+}
+
+fractalTreeCanvas.addEventListener('mousemove', (e) => {
+    const rect = fractalTreeCanvas.getBoundingClientRect();
+
+    let mouseX = e.x - rect.left;
+    let mouseY = e.y - rect.top;
+
+    separationAngle = map(mouseX, 0, width, 0, Math.PI * 2);
+    branchLength = map(mouseY, 0, height, 50, 200);
+});
+
+fractalTreeCanvas.addEventListener('mouseout', () => {
+    separationAngle = Math.PI / 6;
+    branchLength = 125;
+});
+
+fractalTreeCanvas.addEventListener('touchmove', (e) => {
+    const rect = fractalTreeCanvas.getBoundingClientRect();
+
+    let touch = e.touches[0];
+
+    let touchX = touch.clientX - rect.left;
+    let touchY = touch.clientY - rect.top;
+
+    separationAngle = map(touchX, 0, width, 0, Math.PI * 2);
+    branchLength = map(touchY, 0, height, 50, 200);
+}, {passive: false});
+
+fractalTreeCanvas.addEventListener('touchend', () => {
+    separationAngle = Math.PI / 6;
+    branchLength = 125;
+});

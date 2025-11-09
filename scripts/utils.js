@@ -23,3 +23,15 @@ export function copy2DArray(source, target) {
         }
     }
 }
+
+export function map(value, start1, stop1, start2, stop2, withinBounds = false) {
+  let newValue = ((value - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
+  if (withinBounds) {
+    if (stop2 > start2) {
+      newValue = Math.min(Math.max(newValue, start2), stop2);
+    } else {
+      newValue = Math.min(Math.max(newValue, stop2), start2);
+    }
+  }
+  return newValue;
+}
