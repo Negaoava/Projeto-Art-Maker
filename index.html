@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Maker Proj</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-title-container">
+            <h1>Proj. Arte Maker</h1>
+            <p class="autor">Por: Davi Silva</p>
+        </div>
+        <nav class="navigation-bar">
+            <button class="navigation-button">☰ Menu</button>
+            <ul class="navigation-items">
+                <li class="navigation-item">Home</li>
+                <li class="navigation-item">Simulations</li>
+                <li class="navigation-item">About</li>
+                <li class="navigation-item">Contact</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h1 class="main-content-title">Simulations</h1>
+
+        <div class="simulation-container">
+            <h3 class="simulation-title">Sand Simulation</h3>
+            <div class="simulation-canvas-container">
+                <canvas id="simulation-one" class="simulation-canvas" width="500" height="400"></canvas>
+            </div>
+        </div>
+    </main>
+    <script src="scripts/main.js" type="module"></script>
+    <script src="scripts/simulations.js" type="module"></script>
+    <script src="scripts/events.js" type="module"></script>
+</body>
+</html>
