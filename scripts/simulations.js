@@ -16,13 +16,11 @@ let nextSandGrid = make2DArray(rows, cols);
 sandCtx.strokeStyle = 'gray';
 sandCtx.fillStyle = 'gray';
 
-sandGrid[1][1] = 1;
-
-let mouseX, mouseY;
 let isMouseDown = false;
+
 sandCanvas.addEventListener('mousemove', (e) => {
-    mouseX = Math.round((e.x - rect.left) / cellSize);
-    mouseY = Math.round((e.y - rect.top) / cellSize);
+    let mouseX = Math.round((e.x - rect.left) / cellSize);
+    let mouseY = Math.round((e.y - rect.top) / cellSize);
 
     let active = 1;
 
@@ -31,12 +29,33 @@ sandCanvas.addEventListener('mousemove', (e) => {
     }
 });
 
-sandCanvas.addEventListener('mousedown', (e) => {
+sandCanvas.addEventListener('mousedown', () => {
     isMouseDown = true;
 });
 
-sandCanvas.addEventListener('mouseup', (e) => {
+sandCanvas.addEventListener('mouseup', () => {
     isMouseDown = false;
+});
+
+let isTouching = false;
+
+sandCanvas.addEventListener('touchmove', (e) => {
+    let touchX = Math.round((e.x - rect.left) / cellSize);
+    let touchY = Math.round((e.y - rect.top) / cellSize);
+
+    let active = 1;
+
+    if (isTouching) {
+        sandGrid[touchX][touchY] = active;
+    }
+});
+
+sandCanvas.addEventListener('touchstart', () => {
+    isTouching = true;
+});
+
+sandCanvas.addEventListener('touchend', () => {
+    isTouching = false;
 });
 
 function sandDrawLoop() {
