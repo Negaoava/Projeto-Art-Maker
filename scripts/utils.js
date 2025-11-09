@@ -5,8 +5,6 @@ export function make2DArray(rows, cols) {
         arr[i] = new Array(rows).fill(0);
     }
 
-    console.log(arr);
-
     return arr;
 }
 
