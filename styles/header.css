@@ -1,0 +1,97 @@
+/* Header Stylying */
+.header {
+    display: flex;
+    justify-content: space-between;
+    /* border: black solid 1px; */
+    padding-bottom: 30px;
+    position: relative;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: rgb(243, 243, 243);
+}
+
+.header::before {
+    content: "";
+    background: conic-gradient(from var(--angle),
+        rgb(48, 48, 185), rgb(136, 76, 136), rgb(71, 216, 204), purple, rgb(50, 190, 224)
+    );
+    z-index: -1;
+    left: 0;
+    right: 0;
+    height: 112px;
+    position: absolute;
+    animation: spin 2s ease infinite;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes spin {
+    to {
+        --angle: 360deg;
+    }
+}
+
+.header-title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.navigation-bar {
+    margin-right: 100px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+
+.navigation-items {
+    display: none;
+    background-color: white;
+    list-style: none;
+    position: absolute;
+    bottom: -75px;
+    border: 1px rgb(80, 80, 80) solid;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    text-align: center;
+    padding: 5px;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.navigation-item:hover {
+    color: white;
+    background-color: black;
+}
+
+.navigation-button {
+    background: white;
+    border: rgb(80, 80, 80) solid 1px;
+    padding: 10px 38px;
+    border-radius: 50px;
+    z-index: 1;
+    transition: background-color 0.15s;
+    cursor: pointer;
+}
+
+.navigation-button:hover {
+    background-color: black;
+    color: white;
+}
+
+.navigation-button:active {
+    opacity: 0.5;
+}
