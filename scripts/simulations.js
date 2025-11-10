@@ -55,6 +55,7 @@ sandCanvas.addEventListener('touchmove', (e) => {
     e.preventDefault();
     const rect = sandCanvas.getBoundingClientRect();
     const touch = e.touches[0];
+    const radius = 3;
 
     let touchX = Math.round((touch.clientX - rect.left) / cellSize);
     let touchY = Math.round((touch.clientY - rect.top) / cellSize);
@@ -62,7 +63,16 @@ sandCanvas.addEventListener('touchmove', (e) => {
     let active = 1;
 
     if (isTouching) {
-        sandGrid[touchX][touchY] = active;
+        for (let x = -radius; x < radius; x++) {
+            for (let y = -radius; y < radius; y++) {
+                if (x * x + y * y <= radius * radius) {
+                    if (Math.random() > 0.67) {
+                        sandGrid[x + touchX][y + touchY] = active;
+                        
+                    }
+                }
+            }
+        }
     }
 }, {passive: false});
 
