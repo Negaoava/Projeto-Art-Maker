@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-import { copy2DArray, make2DArray, reset2DArray } from "./utils.js";
-
-// First simulation logic
-export const cellSize = 10;
-=======
 import { copy2DArray, make2DArray, reset2DArray, map } from "./utils.js";
 
 // First simulation logic
 const cellSize = 5;
->>>>>>> aa54893f431010f518f0046b373797d63c003788
 const sandCanvas = document.getElementById('simulation-one');
 const sandCtx = sandCanvas.getContext('2d');
 const height = sandCanvas.height;
@@ -19,13 +12,6 @@ const rows = height / cellSize;
 let sandGrid = make2DArray(rows, cols);
 let nextSandGrid = make2DArray(rows, cols);
 
-<<<<<<< HEAD
-sandCtx.strokeStyle = 'white';
-sandCtx.fillStyle = 'white';
-
-sandGrid[1][1] = 1;
-
-=======
 sandCtx.strokeStyle = 'gray';
 sandCtx.fillStyle = 'gray';
 
@@ -34,6 +20,7 @@ let isMouseDown = false;
 // Mouse interactivity
 sandCanvas.addEventListener('mousemove', (e) => {
     const rect = sandCanvas.getBoundingClientRect();
+    const radius = 3;
 
     let mouseX = Math.round((e.x - rect.left) / cellSize);
     let mouseY = Math.round((e.y - rect.top) / cellSize);
@@ -41,7 +28,15 @@ sandCanvas.addEventListener('mousemove', (e) => {
     let active = 1;
 
     if (isMouseDown) {
-        sandGrid[mouseX][mouseY] = active;
+        for (let x = -radius; x < radius; x++) {
+            for (let y = -radius; y < radius; y++) {
+                if (x * x + y * y <= radius * radius) {
+                    if (Math.random() > 0.67) {
+                        sandGrid[mouseX + x][mouseY + y] = active;
+                    }
+                }
+            }
+        }
     }
 });
 
@@ -80,7 +75,6 @@ sandCanvas.addEventListener('touchend', () => {
 });
 
 // Draw loop for the simulation
->>>>>>> aa54893f431010f518f0046b373797d63c003788
 function sandDrawLoop() {
     sandCtx.clearRect(0, 0, width, height);
 
@@ -91,10 +85,7 @@ function sandDrawLoop() {
 }
 sandDrawLoop();
 
-<<<<<<< HEAD
-=======
 // Function responsible for recognizing active cells and then drawing them
->>>>>>> aa54893f431010f518f0046b373797d63c003788
 function drawSand() {
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
@@ -106,15 +97,6 @@ function drawSand() {
     }
 }
 
-<<<<<<< HEAD
-function sandBehaviour() {
-    for (let i = 0; i < cols; i++) {
-        for (let j = 0; j < rows; j++) {
-            if (sandGrid[i][j] != 0) {
-                if (sandGrid[i][j + 1] == 0) {
-                    nextSandGrid[i][j + 1] = 1
-                    nextSandGrid[i][j] = 0;
-=======
 
 // Function responsible for the sand behaviour within the data structure
 function sandBehaviour() {
@@ -153,16 +135,12 @@ function sandBehaviour() {
 
                 else{
                     nextSandGrid[i][j] = active;
->>>>>>> aa54893f431010f518f0046b373797d63c003788
                 }
             }
         }
     }
     copy2DArray(nextSandGrid, sandGrid);
     reset2DArray(nextSandGrid);
-<<<<<<< HEAD
-}
-=======
 }
 
 // Second simulation logic
@@ -234,4 +212,3 @@ fractalTreeCanvas.addEventListener('touchend', () => {
     separationAngle = Math.PI / 6;
     branchLength = 125;
 });
->>>>>>> aa54893f431010f518f0046b373797d63c003788
