@@ -95,7 +95,7 @@ function sandDrawLoop() {
 }
 sandDrawLoop();
 
-// Function responsible for recognizing active cells and then drawing them
+// Function responsible for recognizing active cells and then drawing them on the grid
 function drawSand() {
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
@@ -129,7 +129,9 @@ function sandBehaviour() {
                     nextSandGrid[i][j] = unactive;
                 }
                 else if (hasBothNeighbors && sandGrid[left][below] == unactive && sandGrid[right][below] == unactive) {
-                    let direction = Math.random() > 0.5 ? 1 : -1;
+                    const left = -1;
+                    const right = 1;
+                    let direction = Math.random() > 0.5 ? left : right;
 
                     nextSandGrid[i + direction][below] = active;
                     nextSandGrid[i][j] = unactive;
@@ -222,3 +224,75 @@ fractalTreeCanvas.addEventListener('touchend', () => {
     separationAngle = Math.PI / 6;
     branchLength = 125;
 });
+
+// Third simulation logic
+
+
+const fourierCanvas = document.getElementById('simulation-three');
+const fourierCtx = fourierCanvas.getContext('2d');
+const fourierCanvasHeight = fourierCanvas.height;
+const fourierCanvasWidth = fourierCanvas.width;
+
+fourierCtx.strokeStyle = 'white';
+fourierCtx.fillStyle = 'white';
+
+let fourierAngle = 0;
+let waves = [];
+
+function fourierDrawLoop() {
+    fourierCtx.setTransform(1, 0, 0, 1, 0, 0);
+    fourierCtx.clearRect(0, 0, fourierCanvasWidth, fourierCanvasHeight);
+    fourierCtx.translate(fourierCanvasWidth / 2 - 200, fourierCanvasHeight / 2);
+    fourierCtx.scale(1, -1);
+
+    drawCircles(0, 0);
+
+    fourierAngle += 0.01;
+    requestAnimationFrame(fourierDrawLoop);
+}
+fourierDrawLoop();
+
+
+function drawCircles(x, y) {
+    const radius = 100;
+
+    
+    fourierCtx.beginPath();
+    fourierCtx.arc(x, y, radius, 0, Math.PI * 2);
+    fourierCtx.stroke();
+    
+    let xCord = radius * Math.cos(fourierAngle);
+    let yCord = radius * Math.sin(fourierAngle)
+
+    fourierCtx.beginPath();
+    fourierCtx.arc(xCord, yCord, 4, 0, Math.PI * 2);
+    fourierCtx.fill()
+
+    fourierCtx.beginPath();
+    fourierCtx.moveTo(x, y);
+    fourierCtx.lineTo(xCord, yCord);
+    fourierCtx.stroke();
+
+    drawWaves(xCord, yCord);
+}
+
+function drawWaves(x, y) {
+    waves.unshift(y);
+
+    let offSet = 250
+
+    for (let i = 0; i < waves.length; i++) {
+        fourierCtx.beginPath();
+        fourierCtx.moveTo(i - 1 + offSet, waves[i]);
+        fourierCtx.lineTo(i + offSet, waves[i])
+        fourierCtx.stroke();
+
+    }
+    
+    fourierCtx.beginPath();
+    fourierCtx.moveTo(x, y);
+    fourierCtx.lineTo(offSet, waves[0])
+    fourierCtx.stroke();
+
+    if (waves.length > 500) waves.pop()
+}
