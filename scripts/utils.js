@@ -5,8 +5,11 @@ export function make2DArray(rows, cols) {
         arr[i] = new Array(rows).fill(0);
     }
 
+<<<<<<< HEAD
     console.log(arr);
 
+=======
+>>>>>>> aa54893f431010f518f0046b373797d63c003788
     return arr;
 }
 
@@ -24,4 +27,19 @@ export function copy2DArray(source, target) {
             target[i][j] = source[i][j];
         }
     }
+<<<<<<< HEAD
+=======
+}
+
+export function map(value, start1, stop1, start2, stop2, withinBounds = false) {
+  let newValue = ((value - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
+  if (withinBounds) {
+    if (stop2 > start2) {
+      newValue = Math.min(Math.max(newValue, start2), stop2);
+    } else {
+      newValue = Math.min(Math.max(newValue, stop2), start2);
+    }
+  }
+  return newValue;
+>>>>>>> aa54893f431010f518f0046b373797d63c003788
 }

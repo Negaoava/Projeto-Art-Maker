@@ -9,7 +9,11 @@
     top: 0;
     right: 0;
     left: 0;
+<<<<<<< HEAD
     background: rgb(243, 243, 243);
+=======
+    background-color: white;
+>>>>>>> aa54893f431010f518f0046b373797d63c003788
 }
 
 .header::before {

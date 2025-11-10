@@ -4,6 +4,17 @@
     padding: 0;
 }
 
+<<<<<<< HEAD
+=======
+canvas {
+    touch-action: none;
+}
+
+body {
+    background-color: rgb(238, 238, 238);
+}
+
+>>>>>>> aa54893f431010f518f0046b373797d63c003788
 .main-content-title {
     margin-top: 150px;
     margin-left: 40px;
@@ -19,6 +30,10 @@
     justify-content: center;
     flex-direction: column;
     margin-top: 30px;
+<<<<<<< HEAD
+=======
+    margin-bottom: 130px;
+>>>>>>> aa54893f431010f518f0046b373797d63c003788
 }
 
 .simulation-title {
