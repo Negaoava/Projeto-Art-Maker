@@ -288,7 +288,7 @@ function drawWaves(x, y) {
         fourierCtx.stroke();
 
     }
-    
+
     fourierCtx.beginPath();
     fourierCtx.moveTo(x, y);
     fourierCtx.lineTo(offSet, waves[0])
