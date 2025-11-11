@@ -229,8 +229,7 @@ fractalTreeCanvas.addEventListener('touchend', () => {
     branchLength = 125;
 });
 
-// Third simulation logic
-
+// Third simulation logic ---------------------------------------------------------------------------------------------
 
 const fourierCanvas = document.getElementById('simulation-three');
 const fourierCtx = fourierCanvas.getContext('2d');
@@ -251,7 +250,7 @@ function fourierDrawLoop() {
 
     drawCircles(0, 0);
 
-    fourierAngle += 0.01;
+    fourierAngle += 0.02;
     requestAnimationFrame(fourierDrawLoop);
 }
 fourierDrawLoop();
@@ -290,7 +289,6 @@ function drawWaves(x, y) {
         fourierCtx.moveTo(i - 1 + offSet, waves[i]);
         fourierCtx.lineTo(i + offSet, waves[i])
         fourierCtx.stroke();
-
     }
     
     fourierCtx.beginPath();
