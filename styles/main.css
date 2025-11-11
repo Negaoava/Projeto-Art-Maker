@@ -40,5 +40,10 @@ body {
 .simulation-canvas {
     background-color: black;
     border-radius: 5px;
+    transition: box-shadow 0.3s;
+}
+
+.simulation-canvas:hover {
+    box-shadow: 0px 0px 0px 10px rgba(0, 0, 0, 0.4);
 }
 

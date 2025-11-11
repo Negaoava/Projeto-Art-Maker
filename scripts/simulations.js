@@ -259,7 +259,6 @@ fourierDrawLoop();
 function drawCircles(x, y) {
     const radius = 100;
 
-    
     fourierCtx.beginPath();
     fourierCtx.arc(x, y, radius, 0, Math.PI * 2);
     fourierCtx.stroke();
@@ -269,32 +268,32 @@ function drawCircles(x, y) {
 
     fourierCtx.beginPath();
     fourierCtx.arc(xCord, yCord, 4, 0, Math.PI * 2);
-    fourierCtx.fill()
+    fourierCtx.fill();
 
     fourierCtx.beginPath();
     fourierCtx.moveTo(x, y);
     fourierCtx.lineTo(xCord, yCord);
     fourierCtx.stroke();
 
-    drawWaves(xCord, yCord);
+    // drawWaves(xCord, yCord);
 }
 
-function drawWaves(x, y) {
-    waves.unshift(y);
+// function drawWaves(x, y) {
+//     waves.unshift(y);
 
-    let offSet = 250
+//     let offSet = 250;
 
-    for (let i = 0; i < waves.length; i++) {
-        fourierCtx.beginPath();
-        fourierCtx.moveTo(i - 1 + offSet, waves[i]);
-        fourierCtx.lineTo(i + offSet, waves[i])
-        fourierCtx.stroke();
-    }
+//     for (let i = 0; i < waves.length; i++) {
+//         fourierCtx.beginPath();
+//         fourierCtx.moveTo(i - 1 + offSet, waves[i]);
+//         fourierCtx.lineTo(i + offSet, waves[i])
+//         fourierCtx.stroke();
+//     }
 
-    fourierCtx.beginPath();
-    fourierCtx.moveTo(x, y);
-    fourierCtx.lineTo(offSet, waves[0])
-    fourierCtx.stroke();
+//     fourierCtx.beginPath();
+//     fourierCtx.moveTo(x, y);
+//     fourierCtx.lineTo(offSet, waves[0])
+//     fourierCtx.stroke();
 
-    if (waves.length > 500) waves.pop()
-}
+//     if (waves.length > 500) waves.pop()
+// }
