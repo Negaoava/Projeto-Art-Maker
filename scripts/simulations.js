@@ -1,6 +1,6 @@
 import { copy2DArray, make2DArray, reset2DArray, map } from "./utils.js";
 
-// First simulation logic
+// First simulation logic -----------------------------------------------------------------------------------------------------------
 const cellSize = 5;
 const sandCanvas = document.getElementById('simulation-one');
 const sandCtx = sandCanvas.getContext('2d');
@@ -155,7 +155,7 @@ function sandBehaviour() {
     reset2DArray(nextSandGrid);
 }
 
-// Second simulation logic
+// Second simulation logic -----------------------------------------------------------------------------------------------
 
 const fractalTreeCanvas = document.getElementById('simulation-two');
 const fractalTreeCtx = fractalTreeCanvas.getContext('2d');
@@ -166,6 +166,7 @@ let branchLength = 125;
 fractalTreeCtx.strokeStyle = 'white';
 
 function drawFractalTree() {
+    // Setup of the canvas for the simulation to work
     fractalTreeCtx.setTransform(1, 0, 0, 1, 0, 0);
     fractalTreeCtx.clearRect(0, 0, width, height);
     fractalTreeCtx.translate(width / 2, height);
@@ -177,6 +178,7 @@ function drawFractalTree() {
 }
 drawFractalTree();
 
+// Function responsible for drawing the branches of the fractal tree
 function drawBranch(length, x, y, angle) {
     let endX = x + length * Math.cos(angle);
     let endY = y + length * Math.sin(angle);
@@ -192,6 +194,7 @@ function drawBranch(length, x, y, angle) {
     }
 }
 
+// Events responsible for mouse interactivity
 fractalTreeCanvas.addEventListener('mousemove', (e) => {
     const rect = fractalTreeCanvas.getBoundingClientRect();
 
@@ -207,6 +210,7 @@ fractalTreeCanvas.addEventListener('mouseout', () => {
     branchLength = 125;
 });
 
+// Events responsible for touch interactivity
 fractalTreeCanvas.addEventListener('touchmove', (e) => {
     e.preventDefault();
     const rect = fractalTreeCanvas.getBoundingClientRect();
@@ -225,8 +229,7 @@ fractalTreeCanvas.addEventListener('touchend', () => {
     branchLength = 125;
 });
 
-// Third simulation logic
-
+// Third simulation logic ---------------------------------------------------------------------------------------------
 
 const fourierCanvas = document.getElementById('simulation-three');
 const fourierCtx = fourierCanvas.getContext('2d');
@@ -247,7 +250,7 @@ function fourierDrawLoop() {
 
     drawCircles(0, 0);
 
-    fourierAngle += 0.01;
+    fourierAngle += 0.02;
     requestAnimationFrame(fourierDrawLoop);
 }
 fourierDrawLoop();
@@ -286,7 +289,6 @@ function drawWaves(x, y) {
         fourierCtx.moveTo(i - 1 + offSet, waves[i]);
         fourierCtx.lineTo(i + offSet, waves[i])
         fourierCtx.stroke();
-
     }
 
     fourierCtx.beginPath();
