@@ -1,6 +1,6 @@
 import { copy2DArray, make2DArray, reset2DArray, map } from "./utils.js";
 
-// First simulation logic
+// First simulation logic -----------------------------------------------------------------------------------------------------------
 const cellSize = 5;
 const sandCanvas = document.getElementById('simulation-one');
 const sandCtx = sandCanvas.getContext('2d');
@@ -25,9 +25,16 @@ sandCanvas.addEventListener('mousemove', (e) => {
     let mouseY = Math.round((e.y - rect.top) / cellSize);
 
     let active = 1;
+    let radius = 3;
 
     if (isMouseDown) {
-        sandGrid[mouseX][mouseY] = active;
+        for (let x = -radius; x < radius; x++) {
+            for (let y = -radius; y < radius; y++) {
+                if (x * x + y * y <= radius * radius) {
+                    sandGrid[mouseX + x][mouseY + y] = active;
+                }
+            }
+        }
     }
 });
 
@@ -134,7 +141,7 @@ function sandBehaviour() {
     reset2DArray(nextSandGrid);
 }
 
-// Second simulation logic
+// Second simulation logic -----------------------------------------------------------------------------------------------
 
 const fractalTreeCanvas = document.getElementById('simulation-two');
 const fractalTreeCtx = fractalTreeCanvas.getContext('2d');
@@ -145,6 +152,7 @@ let branchLength = 125;
 fractalTreeCtx.strokeStyle = 'white';
 
 function drawFractalTree() {
+    // Setup of the canvas for the simulation to work
     fractalTreeCtx.setTransform(1, 0, 0, 1, 0, 0);
     fractalTreeCtx.clearRect(0, 0, width, height);
     fractalTreeCtx.translate(width / 2, height);
@@ -156,6 +164,7 @@ function drawFractalTree() {
 }
 drawFractalTree();
 
+// Function responsible for drawing the branches of the fractal tree
 function drawBranch(length, x, y, angle) {
     let endX = x + length * Math.cos(angle);
     let endY = y + length * Math.sin(angle);
@@ -171,6 +180,7 @@ function drawBranch(length, x, y, angle) {
     }
 }
 
+// Events responsible for mouse interactivity
 fractalTreeCanvas.addEventListener('mousemove', (e) => {
     const rect = fractalTreeCanvas.getBoundingClientRect();
 
@@ -186,6 +196,7 @@ fractalTreeCanvas.addEventListener('mouseout', () => {
     branchLength = 125;
 });
 
+// Events responsible for touch interactivity
 fractalTreeCanvas.addEventListener('touchmove', (e) => {
     e.preventDefault();
     const rect = fractalTreeCanvas.getBoundingClientRect();
@@ -203,3 +214,5 @@ fractalTreeCanvas.addEventListener('touchend', () => {
     separationAngle = Math.PI / 6;
     branchLength = 125;
 });
+
+// Third simulation logic -------------------------------------------------------------------------------------------
